@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 
-.nav-buttons {
-    margin-left: 60%;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -44,16 +40,44 @@ h6 {
     color: #D8D8D8;
 }
 
-.navbar {
-    font-size: 16px;
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-    top: 0;
-    left: 0;
+button {
+
+    font-size: 0.8rem;
+    font-weight: 900;
+    outline: none;
+    border: none;
+    background-color: #1D1D1D;
+    color: aliceblue;
+    padding: 13px 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.5s ease;
+
 }
 
+button:hover {
+    background-color: coral;
+}
+
+.navbar {
+    font-size: 16px;
+    padding-top: 1.8rem !important;
+    padding-bottom: 1.8rem !important;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+@media only screen and (min-width: 992px) {
+
+    .navbar-nav {
+        margin-left: 50%;
+    }
+}
+
+
+
 .navbar-light .navbar-nav .nav-link {
-    
     padding: 0 20px;
     color: #000;
     transition: 0.4s ease;
@@ -71,5 +95,237 @@ h6 {
     padding: 0 0.7px;
     transition: 0.4s ease;
     cursor: pointer;
-    margin-left: 8px;
+    margin-left: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+
+.nav-buttons {
+    margin: 5px;
+}
+
+.nav-buttons ul {
+    margin: 1rem;
+}
+
+.nav-buttons ul .fas {
+    margin: 15px 5px 5px 15px;
+}
+
+}
+
+
+#home {
+    background-image: url('../images/back.jpg');
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position-y: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#home span {
+    color: coral;
+}
+
+.img-fluid {
+    height: 130px;
+}
+
+#brand {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    width: 100%;
+    /* height: 150px; */
+    /* max-height: fit-content; */
+}
+
+#new .one img {
+    width: 100%;
+    /* height: 100%; */
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#new .one {
+    position: relative;
+}
+
+#new .one .details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: burlywood;
+    font-weight: bold;
+    transition: 0.4s ease;
+    opacity: 0.5;
+    background-color: rgb(1,1,1);
+    width: 100%;
+    height: 100%;
+}
+
+#new .one .details:hover {
+    background-color: cornsilk;
+}
+
+#new .row .one .details {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.product {
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.product img {
+    transition: 0.3s all;
+}
+
+.product:hover img {
+    opacity: 0.4;
+}
+
+.product .buy-btn {
+    background-color: #fb774b;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: 0.3s all;
+}
+
+.product:hover .buy-btn {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+hr {
+    width: 30px;
+    height: 3px !important;
+    opacity: 1 !important;
+    color: #fb774b;
+    background-color: #fb774b;
+}
+
+.star {
+    padding: 10px 0;
+}
+
+.star i {
+    font-size: 0.9rem;
+    color: goldenrod;
+}
+
+#banner {
+    background-image: url('../images/banner.jpg');
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: 80px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#banner h1 {
+    color: coral;
+}
+
+#banner button {
+    background-color: #fb774b;
+}
+
+#banner button:hover {
+    background-color: #1d1d1d;
+}
+
+footer {
+    background-color: #222222;
+}
+
+footer h5 {
+    color: #d8d8d8;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+footer li {
+    padding-bottom: 4px;
+}
+
+footer li a {
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: none;
+}
+
+footer li a:hover {
+    color: #d8d8d8;
+}
+
+footer .copyright a {
+    color: #000;
+    height: 40px;
+    width: 40px;
+    background-color: #fff;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 38px;
+    transition: 0.3s ease;
+    margin: 0 3px;
+}
+
+footer .copyright a:hover {
+    color: #fff;
+    background-color: #fb774b;
+}
+
+footer p {
+    color: #fff;
+}
+.social-icons {
+    text-align: right;
+}
+
+
+
+.logo {
+    width: 80px;
+    height: 50px;
+}
+
+.footer-featured {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-featured ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-contact {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: end;
 }
