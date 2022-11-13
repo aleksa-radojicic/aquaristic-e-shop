@@ -9,6 +9,7 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
+
 h1 {
     font-size: 2.5rem;
     font-weight: 500;
@@ -17,7 +18,8 @@ h1 {
 h2 {
     font-size: 1.8rem;
     font-weight: 400;
-}1
+}
+h3 {
     font-size: 1.5rem;
     font-weight: 600;
 }
@@ -331,12 +333,18 @@ footer p {
 .small-img-group {
     display: flex;
     justify-content: space-between;
-    width: 250px;
-    height: 250px;
+    width: 300px;
+}
+
+.single-product {
+    margin-top: 115px;
 }
 
 .small-img-col {
     cursor: pointer;
+    flex-basis: 25%;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .single-product input {
@@ -418,12 +426,18 @@ footer p {
     color:#fb774b;
     text-decoration: none;
     font-size: 14px;
+    background-color: #fff;
+    border: none;
+    width: 100%;
+    text-align: left;
 }
 
 .cart .edit-btn {
     color:#fb774b;
     text-decoration: none;
     font-size: 15px;
+    background-color: #fff;
+    border: none;
 }
 
 .cart .product-info p {
