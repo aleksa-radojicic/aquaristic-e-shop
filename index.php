@@ -11,13 +11,6 @@
   <!--Navbar-->
   <?php require_once('navbar.php'); ?>
 
-  <?php
-  session_start();
-
-  require_once('flash.php');
-  get_msg();
-  ?>
-
   <!--Home-->
   <section id="home">
     <div class="container mt-0 pt-0">

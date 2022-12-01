@@ -2,11 +2,15 @@
 
 session_start();
 
-if (!empty($_SESSION["cart"]) && isset($_POST["checkout"])) {
-  
+  //prevent access from url bar indirectly
+  if (!isset($_SESSION['logged_in'])) {
+  header('location: index.php');
+  exit;
+}
+
+if (!empty($_SESSION["cart"])) {
 } else {
-  set_msg('You need to fill the cart first.', 'warning');
-  header("location: index.php");
+  header("location: index.php?addproductstocartfirst");
 }
 
 
@@ -34,14 +38,6 @@ if (!empty($_SESSION["cart"]) && isset($_POST["checkout"])) {
     </div>
     <div class="mx-auto container">
       <form id="checkout-form" action="server/create_order.php" method="POST">
-        <div class="form-group checkout-small-element">
-          <label>Name</label>
-          <input type="text" class="form-control" id="checkout-name" name="name" placeholder="Name" required />
-        </div>
-        <div class="form-group checkout-small-element">
-          <label>Email</label>
-          <input type="text" class="form-control" id="checkout-email" name="email" placeholder="Email" required />
-        </div>
         <div class="form-group checkout-small-element">
           <label>Phone</label>
           <input type="tel" class="form-control" id="checkout-phone" name="phone" placeholder="Phone" required />

@@ -2,6 +2,12 @@
 
 session_start();
 
+//user not logged in
+if (!isset($_SESSION['logged_in'])) {
+  header('location: index.php?prijaviteseprvo');
+  exit;
+}
+
 if (isset($_POST["add_to_cart"])) {
 
   if (isset($_SESSION['cart'])) {
@@ -42,7 +48,6 @@ if (isset($_POST["add_to_cart"])) {
 
     computeTotalCartPrice();
   }
-
 } else if (isset($_POST["remove_product"])) {
 
   $product_id = $_POST['product_id'];
@@ -61,8 +66,6 @@ if (isset($_POST["add_to_cart"])) {
   $_SESSION["cart"][$product_id] = $product_array;
 
   computeTotalCartPrice();
-
-  
 }
 
 
@@ -96,8 +99,8 @@ function computeTotalCartPrice()
 
 <body>
 
-    <!--Navbar-->
-    <?php require_once('navbar.php'); ?>
+  <!--Navbar-->
+  <?php require_once('navbar.php'); ?>
 
 
   <!--Cart-->
@@ -159,7 +162,7 @@ function computeTotalCartPrice()
 
     <div class="checkout-container">
       <form method="POST" action="checkout.php">
-        <input type="submit" class="btn checkout-btn" name="checkout" value="Checkout"/>
+        <input type="submit" class="btn checkout-btn" name="checkout" value="Checkout" />
       </form>
     </div>
 

@@ -202,6 +202,7 @@ button:hover {
     transform: translateY(50px);
     opacity: 0;
     transition: 0.3s all;
+    color: #fff;
 }
 
 .product:hover .buy-btn {
@@ -560,11 +561,6 @@ th:last-child {
     padding: 5px 20px;
     color: #fff;
     background-color: #fb774b;
-    text-align: left;
-}
- 
-.orders th:nth-child(2) {
-    text-align: right;
 }
 
 .orders td {
@@ -577,6 +573,10 @@ th:last-child {
     margin-right: 10px;
 }
 
+.orders .order-details-btn {
+    color: #fff;
+    background-color: #fb774b;
+}
 
 /* Checkout */
 #checkout-form .checkout-small-element {

@@ -11,7 +11,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="shop.html">Shop</a>
+            <a class="nav-link" href="shop.php">Shop</a>
           </li>
 
           <li class="nav-item">
@@ -19,12 +19,12 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact Us</a>
+            <a class="nav-link" href="contact.php">Contact Us</a>
           </li>
 
           <li class="nav-item">
             <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
-            <a href="account.html"><i class="fas fa-user"></i></a>
+            <a href="account.php"><i class="fas fa-user"></i></a>
           </li>
         </ul>
       </div>
