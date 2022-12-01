@@ -2,14 +2,36 @@
 
 include('server/connection.php');
 
-$user_id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("select * from products");
+//usere selected certain page number
+if (isset($_GET['page_no'])) {
 
-$stmt->execute();
+  
+  $page_no = $_GET['page_no'];
+} else {
+  //user just entered the page
+  $page_no = 1;
+}
 
-$products = $stmt->get_result();
+$stmt1 = $conn->prepare("select count(*) as total_records from products");
 
+$stmt1->execute();
+$stmt1->bind_result($total_records);
+$stmt1->store_result();
+$stmt1->fetch();
+
+$total_records_per_page = 2;
+
+$offset = ($page_no - 1) * $total_records_per_page;
+
+$previous_page = $page_no - 1;
+$next_page = $page_no + 1;
+
+$total_no_of_pages = ceil($total_records / $total_records_per_page);
+
+$stmt2 = $conn->prepare("select * from products limit $offset, $total_records_per_page");
+$stmt2->execute();
+$products = $stmt2->get_result();
 
 ?>
 
@@ -58,7 +80,7 @@ $products = $stmt->get_result();
       <p>Here you can check our featured products</p>
     </div>
 
-      <div class="row mx-auto container">
+    <div class="row mx-auto container">
 
 
       <?php while ($row = $products->fetch_assoc()) { ?>
@@ -84,16 +106,60 @@ $products = $stmt->get_result();
 
       <nav aria-label="Page navigation example">
         <ul class="pagination mt-5">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+          <!--Start-->
+          <li class="page-item"><a class="page-link <?php if ($page_no <= 1) {
+                                                      echo 'visually-hidden';
+                                                    } ?>" href="?page_no=1">1</a>
+          </li>
+
+          <!--Start dots-->
+          <li class="page-item"><a class="page-link <?php if ($page_no <= 2) {
+                                                      echo 'visually-hidden';
+                                                    } ?>" href="#">...</a>
+          </li>
+
+          <!--Current-->
+          <li class="page-item"><a class="page-link" href="<?php "?page_no=" . $page_no; ?>"><?php echo $page_no; ?></a></li>
+
+          <!--End dots-->
+          <li class="page-item"><a class="page-link <?php if ($page_no >= $total_no_of_pages - 1) {
+                                                      echo 'visually-hidden';
+                                                    } ?>" href="#">...</a>
+          </li>
+
+          <!--End-->
+          <li class="page-item"><a class="page-link <?php if ($page_no >= $total_no_of_pages) {
+                                                      echo 'visually-hidden';
+                                                    } ?>" href="<?php "?page_no=" . $total_no_of_pages; ?>"><?php echo $total_no_of_pages; ?></a>
+          </li>
+
+          <!--Previous-->
+          <li class="page-item <?php if ($page_no <= 1) {
+                                  echo 'visually-hidden';
+                                } ?>">
+            <a class="page-link" href="<?php if ($page_no <= 1) {
+                                          echo '#';
+                                        } else {
+                                          echo "?page_no=" . $previous_page;
+                                        } ?>">Previous</a>
+          </li>
+
+          <!--Next-->
+          <li class="page-item <?php if ($page_no >= $total_no_of_pages) {
+                                  echo 'visually-hidden';
+                                } ?>">
+            <a class="page-link" href="<?php if ($page_no >= $total_no_of_pages) {
+                                          echo '#';
+                                        } else {
+                                          echo "?page_no=" . $next_page;
+                                        } ?>">Next</a>
+          </li>
 
         </ul>
       </nav>
 
-      </div>
+    </div>
 
   </section>
 
