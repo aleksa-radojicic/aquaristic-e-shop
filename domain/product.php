@@ -12,7 +12,7 @@ class Product
     public $product_price;
 
     //Product constructor
-    public function __construct($id=null, $name, $description, $image, $image2, $image3, $image4, $price)
+    public function __construct($id=null, $name, $price, $description=null, $image=null, $image2=null, $image3=null, $image4=null)
     {
         $this->product_id = $id;
         $this->product_name = $name;

@@ -1,5 +1,9 @@
 <?php
 
+require_once("order.php");
+require_once("product.php");
+require_once("user.php");
+
 class OrderItem
 {
     public $item_id; //primary key

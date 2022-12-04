@@ -1,5 +1,7 @@
 <?php
 
+require_once('user.php');
+
 class Order
 {
     public $order_id; //primary key
@@ -11,7 +13,7 @@ class Order
     public $order_date;
 
     //Order constructor
-    public function __construct($order_id = null, $order_cost, $user, $user_phone, $user_city, $user_address, $order_date)
+    public function __construct($order_cost, $user, $user_phone, $user_city, $user_address, $order_date, $order_id = null)
     {
         $this->order_id = $order_id;
         $this->order_cost = $order_cost;
