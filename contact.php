@@ -3,12 +3,12 @@
 <?php $title = 'Contact Us'; ?>
 
 <!--Head-->
-<?php require_once('head.php'); ?>
+<?php require('layouts/head.php'); ?>
 
 <body>
 
   <!--Navbar-->
-  <?php require_once('navbar.php'); ?>
+  <?php require('layouts/navbar.php'); ?>
 
   <!--Contact-->
   <section id="contact" class="container my-5 py-5">
@@ -29,5 +29,5 @@
 
 
   <!--Footer-->
-  <?php require_once('footer.php'); ?>
+  <?php require('layouts/footer.php'); ?>
 </body>

@@ -1,43 +1,4 @@
-<?php
-
-session_start();
-
-include('server/connection.php');
-
-if (isset($_POST['login_btn'])) {
-
-  $email = $_POST['email'];
-  $password = md5($_POST['password']);
-
-  $stmt = $conn->prepare("select user_id, user_name, user_email, user_password from users 
-      where user_email= ? and user_password = ?");
-
-  $stmt->bind_param('ss', $email, $password);
-
-  if ($stmt->execute()) {
-    $stmt->bind_result($user_id, $user_name, $user_email, $user_password);
-    $stmt->store_result();
-
-    if ($stmt->num_rows() == 1) {
-
-      $stmt->fetch();
-
-
-      $_SESSION['user_id'] = $user_id;
-      $_SESSION['user_name'] = $user_name;
-      $_SESSION['user_email'] = $user_email;
-      $_SESSION['logged_in'] = true;
-
-      header('location: account.php?successfully_logged_in');
-    } else {
-      header('location: login.php?error=email or password is incorrect');
-    }
-  }
-}
-
-?>
-
-
+<?php require('handlers/login_handler.php'); ?>
 
 
 <!DOCTYPE html>
@@ -46,12 +7,12 @@ if (isset($_POST['login_btn'])) {
 <?php $title = 'Login'; ?>
 
 <!--Head-->
-<?php require_once('head.php'); ?>
+<?php require('layouts/head.php'); ?>
 
 <body>
 
   <!--Navbar-->
-  <?php require_once('navbar.php'); ?>
+  <?php require('layouts/navbar.php'); ?>
 
   <!--Login-->
   <section class="my-5 py-5">
@@ -86,7 +47,7 @@ if (isset($_POST['login_btn'])) {
 
 
   <!--Footer-->
-  <?php require_once('footer.php'); ?>
+  <?php require('layouts/footer.php'); ?>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

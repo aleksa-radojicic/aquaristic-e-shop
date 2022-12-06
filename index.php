@@ -1,15 +1,17 @@
+<?php require('handlers/index_handler.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <?php $title = 'Home'; ?>
 
 <!--Head-->
-<?php require_once('head.php'); ?>
+<?php require('layouts/head.php'); ?>
 
 <body>
 
   <!--Navbar-->
-  <?php require_once('navbar.php'); ?>
+  <?php require('layouts/navbar.php'); ?>
 
   <!--Home-->
   <section id="home">
@@ -73,11 +75,10 @@
     </div>
     <div class="row mx-auto container-fluid">
 
-      <?php include('server/get_featured_products.php'); ?>
-
-      <?php while ($row = $featured_products->fetch_assoc()) { ?>
+      <?php $products = ProductModel::getFeaturedProducts(); ?>
+      <?php foreach ($products as $product) { ?>
         <div onclick="location.href='single_product.php';" class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/<?php echo $row['product_image']; ?>" />
+          <img class="img-fluid mb-3" src="assets/images/<?php echo $product->product_image; ?>" />
 
           <div class="star">
             <i class="fas fa-star"></i>
@@ -87,9 +88,9 @@
             <i class="fas fa-star"></i>
           </div>
 
-          <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
-          <h4 class="p-price">$ <?php echo $row['product_price']; ?></h4>
-          <a href="single_product.php?product_id=<?php echo $row['product_id']; ?>"><button class="buy-btn">Buy Now</button></a>
+          <h5 class="p-name"><?php echo $product->product_name; ?></h5>
+          <h4 class="p-price">$ <?php echo $product->product_price; ?></h4>
+          <a href="single_product.php?product_id=<?php echo $product->product_id; ?>"><button class="buy-btn">Buy Now</button></a>
         </div>
       <?php } ?>
   </section>
@@ -104,7 +105,7 @@
   </section>
 
   <!--Footer-->
-  <?php require_once('footer.php'); ?>
+  <?php require('layouts/footer.php'); ?>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

@@ -1,39 +1,4 @@
-<?php
-
-include('server/connection.php');
-
-
-//usere selected certain page number
-if (isset($_GET['page_no'])) {
-
-  
-  $page_no = $_GET['page_no'];
-} else {
-  //user just entered the page
-  $page_no = 1;
-}
-
-$stmt1 = $conn->prepare("select count(*) as total_records from products");
-
-$stmt1->execute();
-$stmt1->bind_result($total_records);
-$stmt1->store_result();
-$stmt1->fetch();
-
-$total_records_per_page = 2;
-
-$offset = ($page_no - 1) * $total_records_per_page;
-
-$previous_page = $page_no - 1;
-$next_page = $page_no + 1;
-
-$total_no_of_pages = ceil($total_records / $total_records_per_page);
-
-$stmt2 = $conn->prepare("select * from products limit $offset, $total_records_per_page");
-$stmt2->execute();
-$products = $stmt2->get_result();
-
-?>
+<?php require('handlers/shop_handler.php'); ?>
 
 
 <!DOCTYPE html>
@@ -42,7 +7,7 @@ $products = $stmt2->get_result();
 <?php $title = 'Shop'; ?>
 
 <!--Head-->
-<?php require_once('head.php'); ?>
+<?php require('layouts/head.php'); ?>
 
 <head>
   <style>
@@ -69,7 +34,7 @@ $products = $stmt2->get_result();
 <body>
 
   <!--Navbar-->
-  <?php require_once('navbar.php'); ?>
+  <?php require('layouts/navbar.php'); ?>
 
 
   <!--Shop-->
@@ -83,10 +48,10 @@ $products = $stmt2->get_result();
     <div class="row mx-auto container">
 
 
-      <?php while ($row = $products->fetch_assoc()) { ?>
+      <?php foreach ($products as $product) { ?>
 
         <div class="product text-center col-lg-3 col-md-4 col-sm-12">
-          <img class="img-fluid mb-3" src="assets/images/<?php echo $row['product_image']; ?>" />
+          <img class="img-fluid mb-3" src="assets/images/<?php echo $product->product_image; ?>" />
 
           <div class="star">
             <i class="fas fa-star"></i>
@@ -96,9 +61,9 @@ $products = $stmt2->get_result();
             <i class="fas fa-star"></i>
           </div>
 
-          <h5 class="p-name"><?php echo $row['product_name']; ?></h5>
-          <h4 class="p-price">$<?php echo $row['product_price']; ?></h4>
-          <a class="btn buy-btn" href="<?php echo "single_product.php?product_id=" . $row['product_id']; ?>">Buy Now</a>
+          <h5 class="p-name"><?php echo $product->product_name; ?></h5>
+          <h4 class="p-price">$<?php echo $product->product_price; ?></h4>
+          <a class="btn buy-btn" href="<?php echo "single_product.php?product_id=" . $product->product_id; ?>">Buy Now</a>
         </div>
 
       <?php } ?>
@@ -120,7 +85,8 @@ $products = $stmt2->get_result();
           </li>
 
           <!--Current-->
-          <li class="page-item"><a class="page-link" href="<?php "?page_no=" . $page_no; ?>"><?php echo $page_no; ?></a></li>
+          <li class="page-item"><a class="page-link" href="<?php "?page_no=" . $page_no; ?>"><?php echo $page_no; ?></a>
+          </li>
 
           <!--End dots-->
           <li class="page-item"><a class="page-link <?php if ($page_no >= $total_no_of_pages - 1) {
@@ -131,7 +97,9 @@ $products = $stmt2->get_result();
           <!--End-->
           <li class="page-item"><a class="page-link <?php if ($page_no >= $total_no_of_pages) {
                                                       echo 'visually-hidden';
-                                                    } ?>" href="<?php "?page_no=" . $total_no_of_pages; ?>"><?php echo $total_no_of_pages; ?></a>
+                                                    } ?>" href="<?php echo "?page_no=" . $total_no_of_pages; ?>">
+              <?php echo $total_no_of_pages; ?>
+            </a>
           </li>
 
           <!--Previous-->
@@ -164,7 +132,7 @@ $products = $stmt2->get_result();
   </section>
 
   <!--Footer-->
-  <?php require_once('footer.php'); ?>
+  <?php require('layouts/footer.php'); ?>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

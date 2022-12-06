@@ -1,48 +1,16 @@
-<?php
-session_start();
-include('server/connection.php');
-
-//get orders
-if (isset($_SESSION['logged_in'])) {
-
-  $user_id = $_SESSION['user_id'];
-
-  $stmt = $conn->prepare("select * from orders where user_id=?");
-
-  $stmt->bind_param("i", $user_id);
-
-  $stmt->execute();
-
-  $orders = $stmt->get_result();
-} else {
-  header("location: login.php");
-  exit;
-}
-
-
-if (isset($_GET['logout'])) {
-  if (isset($_SESSION['logged_in'])) {
-    unset($_SESSION['logged_in']);
-    unset($_SESSION['email']);
-    unset($_SESSION['user_name']);
-    header("location: login.php");
-    exit;
-  }
-}
-
-?>
+<?php require('handlers/account_handler.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <?php $title = 'Account'; ?>
 
 <!--Head-->
-<?php require_once('head.php'); ?>
+<?php require('layouts/head.php'); ?>
 
 <body>
 
   <!--Navbar-->
-  <?php require_once('navbar.php'); ?>
+  <?php require('layouts/navbar.php'); ?>
 
   <!--Account-->
   <section class="my-5 py-5">
@@ -51,8 +19,8 @@ if (isset($_GET['logout'])) {
         <h3 class="font-weight-bold">Account info</h3>
         <hr class="mx-auto">
         <div class="account-info">
-          <p>Name: <span><?php echo $_SESSION['user_name']; ?></span></p>
-          <p>Email: <span><?php echo $_SESSION['user_email']; ?></span></p>
+          <p>Name: <span><?php echo $user->user_name; ?></span></p>
+          <p>Email: <span><?php echo $user->user_email; ?></span></p>
           <p><a href="account.php?logout=1" id="logout-btn">Logout</a></p>
 
         </div>
@@ -99,23 +67,23 @@ if (isset($_GET['logout'])) {
         <th>Order details</th>
       </tr>
 
-      <?php while ($row = $orders->fetch_assoc()) { ?>
+      <?php foreach ($orders as $order) { ?>
         <tr>
           <td>
-            <span><?php echo $row['order_id'] ?></span>
+            <span><?php echo $order->order_id ?></span>
           </td>
 
           <td>
-            <span><?php echo $row['order_cost'] ?></span>
+            <span><?php echo $order->order_cost ?></span>
           </td>
 
           <td>
-            <span><?php echo $row['order_date'] ?></span>
+            <span><?php echo $order->order_date ?></span>
           </td>
 
           <td>
             <form method="POST" action="order_details.php">
-              <input type="hidden" value="<?php echo $row['order_id']; ?>" name="order_id">
+              <input type="hidden" value="<?php echo $order->order_id; ?>" name="order_id">
               <input class="btn order-details-btn" name="order_details_btn" type="submit" value="details">
             </form>
           </td>
@@ -131,7 +99,7 @@ if (isset($_GET['logout'])) {
 
 
   <!--Footer-->
-  <?php require_once('footer.php'); ?>
+  <?php require('layouts/footer.php'); ?>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

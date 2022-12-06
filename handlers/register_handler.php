@@ -13,8 +13,15 @@ if (isset($_POST["register"])) {
     //retrieving data from POST request
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    $confirmPassword =  md5($_POST['confirmPassword']);
+    $password = $_POST['password'];
+    $confirmPassword =  $_POST['confirmPassword'];
+
+    //length password condition
+    if (strlen($password) < 6) {
+        //redirect to same page and display error message in URL bar
+        header("location: register.php?error=password must be at least 6 characters");
+        exit;
+    }
 
     //identical password and confirmPassword condition
     if ($password !== $confirmPassword) {
@@ -23,14 +30,8 @@ if (isset($_POST["register"])) {
         exit;
     }
 
-    //length password condition
-    if (strlen($password < 6)) {
-        //redirect to same page and display error message in URL bar
-        header("location: register.php?error=password must be at least 6 characters");
-        exit;
-    }
-
-    //if the entered data passes all the above conditions
+    //encrypting password for safety
+    $password = md5($password);
 
     //get if email already exists in db
     $email_unique = UserModel::isEmailUnique($email);
@@ -49,15 +50,15 @@ if (isset($_POST["register"])) {
         //primary key will be set implicitly via UserModel
         $user = new User(null, $name, $email, $password);
 
-        //store 
+        //store signal of query execution in a variable
         $signal = UserModel::createUser($user);
 
         //if query executed successfully
         if ($signal) {
             //redirect to login page and display success message in URL
             header("location: login.php?account_made_successfully");
-        
-        //if query couldn't be executed
+
+            //if query couldn't be executed
         } else {
             //redirect to same page and display error message in URL bar
             header("location: register.php?error=couldn't create an account at the moment");

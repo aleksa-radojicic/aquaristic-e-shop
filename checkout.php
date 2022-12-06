@@ -1,18 +1,6 @@
 <?php
 
-session_start();
-
-  //prevent access from url bar indirectly
-  if (!isset($_SESSION['logged_in'])) {
-  header('location: index.php');
-  exit;
-}
-
-if (!empty($_SESSION["cart"])) {
-} else {
-  header("location: index.php?addproductstocartfirst");
-}
-
+require('handlers/checkout_handler.php');
 
 ?>
 
@@ -23,12 +11,12 @@ if (!empty($_SESSION["cart"])) {
 <?php $title = 'Checkout'; ?>
 
 <!--Head-->
-<?php require_once('head.php'); ?>
+<?php require_once('layouts/head.php'); ?>
 
 <body>
 
   <!--Navbar-->
-  <?php require_once('navbar.php'); ?>
+  <?php require_once('layouts/navbar.php'); ?>
 
   <!--Checkout-->
   <section class="my-5 py-5">
@@ -37,7 +25,7 @@ if (!empty($_SESSION["cart"])) {
       <hr class="mx-auto">
     </div>
     <div class="mx-auto container">
-      <form id="checkout-form" action="server/create_order.php" method="POST">
+      <form id="checkout-form" action="checkout.php" method="POST">
         <div class="form-group checkout-small-element">
           <label>Phone</label>
           <input type="tel" class="form-control" id="checkout-phone" name="phone" placeholder="Phone" required />
@@ -62,7 +50,7 @@ if (!empty($_SESSION["cart"])) {
 
 
   <!--Footer-->
-  <?php require_once('footer.php'); ?>
+  <?php require_once('layouts/footer.php'); ?>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
