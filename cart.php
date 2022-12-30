@@ -1,8 +1,6 @@
 <?php require('handlers/cart_handler.php'); ?>
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,8 +52,8 @@
 
             <td>
               <form method="POST" action="cart.php">
-                <input type="hidden" name="product_id" value="<?php echo $order_item->product->product_id; ?>" />
-                <input type="number" name="product_quantity" value="<?php echo $order_item->product_quantity; ?>" />
+                <input type="hidden" class="cart-product-id" name="product_id" value="<?php echo $order_item->product->product_id; ?>" />
+                <input type="number" class="cart-product-quantity" name="product_quantity" value="<?php echo $order_item->product_quantity; ?>" />
                 <input type="submit" class="edit-btn" value="edit" name="edit_quantity" />
               </form>
             </td>
@@ -73,7 +71,7 @@
       <table>
         <tr>
           <td>Total</td>
-          <td>$<?php echo $_SESSION['total']; ?></td>
+          <td id="cart-total-price">$<?php echo $_SESSION['total']; ?></td>
         </tr>
       </table>
     </div>
@@ -93,6 +91,8 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="assets/jss/cart_script.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,3 @@
-<?php require('handlers/login_handler.php'); ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +19,9 @@
     </div>
     <div class="mx-auto container">
       <form id="login-form" method="POST" action="login.php">
-        <p style="color: red" class="text=center"><?php if (isset($_GET['error'])) {
-                                                    echo $_GET['error'];
-                                                  } ?></p>
+        <div class="form-group">
+          <p style="color: red;" id="loginStatus"></p>
+        </div>
         <div class="form-group">
           <label>Email</label>
           <input type="text" class="form-control" id="login-email" name="email" placeholder="Email" required />
@@ -51,6 +48,9 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="assets/jss/login_script.js"></script>
+
 </body>
 
 </html>

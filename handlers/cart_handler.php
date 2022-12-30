@@ -1,11 +1,10 @@
 <?php
-
 session_start();
-
 
 $absolute_root_path = $_SERVER['DOCUMENT_ROOT'];
 
 require($absolute_root_path . "/classes.php");
+require($absolute_root_path . "/other/cart_update_price.php");
 
 
 //if user isn't logged in and tries to access cart page
@@ -78,58 +77,4 @@ if (isset($_POST["add_to_cart"])) {
 
         updateTotalCartPrice($order_items);
     }
-
-    //if user removed product from cart
-} else if (isset($_POST["remove_product"])) {
-
-    //get product id from POST request that user wants to remove
-    $product_id = $_POST['product_id'];
-
-    //get array of OrderItems from session
-    $order_items = unserialize($_SESSION['cart']);
-
-    //get array key of order item that user wants to remove
-    $key = OrderItem::getArrayKeyFromOrderItemsByProductId($order_items, $product_id);
-
-    //delete OrderItem by array key
-    unset($order_items[$key]);
-
-    //update order items in session
-    $_SESSION['cart'] = serialize($order_items);
-
-    updateTotalCartPrice($order_items);
-
-    //if user edited amount of certain product in cart
-} else if (isset($_POST["edit_quantity"])) {
-
-    //get product id from POST request of order item that user wants to edit quantity
-    $product_id = $_POST['product_id'];
-
-    //get new quantity amount of that order item
-    $product_quantity = $_POST['product_quantity'];
-
-    //retrieve order items from session
-    $order_items = unserialize($_SESSION['cart']);
-
-    //get array key of order item that user wants to edit quantity of
-    $key = OrderItem::getArrayKeyFromOrderItemsByProductId($order_items, $product_id);
-
-    //change quantity of that order item
-    $order_items[$key]->product_quantity = $product_quantity;
-
-    //update array of order items in session
-    $_SESSION['cart'] = serialize($order_items);
-
-    updateTotalCartPrice($order_items);
-}
-
-
-//function which updates total price of order in cart page
-function updateTotalCartPrice($order_items)
-{
-    //update total order price in cart
-    $total = OrderItem::computeTotalCartPrice($order_items);
-
-    //set computed total order price in session
-    $_SESSION['total'] = $total;
 }
