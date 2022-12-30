@@ -75,7 +75,6 @@
     </div>
     <div class="row mx-auto container-fluid">
 
-      <?php $products = ProductModel::getFeaturedProducts(); ?>
       <?php foreach ($products as $product) { ?>
         <div onclick="location.href='single_product.php';" class="product text-center col-lg-3 col-md-4 col-sm-12">
           <img class="img-fluid mb-3" src="assets/images/<?php echo $product->product_image; ?>" />

@@ -42,7 +42,7 @@
     <div class="container mt-5 py-5">
       <h3>Our Products</h3>
       <hr>
-      <p>Here you can check our featured products</p>
+      <p>Here you can check our products</p>
     </div>
 
     <div class="row mx-auto container">

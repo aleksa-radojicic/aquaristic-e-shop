@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<?php $title = 'Order_details'; ?>
+<?php $title = 'Order details'; ?>
 
 <!--Head-->
 <?php require('layouts/head.php'); ?>
@@ -26,7 +26,7 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Total price</th>
+                <th>Subtotal</th>
             </tr>
 
             <?php foreach ($order_items as $order_item) { ?>

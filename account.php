@@ -74,7 +74,7 @@
           </td>
 
           <td>
-            <span><?php echo $order->order_cost ?></span>
+            <span>$<?php echo $order->order_cost ?></span>
           </td>
 
           <td>
