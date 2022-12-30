@@ -14,7 +14,7 @@ if (isset($_SESSION['logged_in'])) {
     $user = unserialize($_SESSION['user']);
 
     //get array of Orders to display in user's list of orders
-    $orders = OrderModel::getCreatedOrdersForGivenUser($user);
+    $orders = OrderModel::getOrdersForGivenUser($user);
 
 //if user is not logged in
 } else {

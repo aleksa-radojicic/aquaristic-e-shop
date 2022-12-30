@@ -33,7 +33,6 @@ if (isset($_POST["add_to_cart"])) {
         null,
         null,
         $product,
-        $user,
         $_POST['product_price'],
         $_POST['product_quantity']
     );
@@ -53,6 +52,9 @@ if (isset($_POST["add_to_cart"])) {
 
             //append OrderItem to array of OrderItems
             $order_items[] = $order_item;
+
+            // echo '<p>alert'.$order_items.'</p>';
+
 
             //update cart by replacing array of order items to newer
             //array of order items with newly added product in cart

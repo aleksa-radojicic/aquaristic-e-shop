@@ -55,7 +55,7 @@ class OrderModel
 
     //gets all orders from a specific user given his user id
     //returns array of Orders
-    public static function getCreatedOrdersForGivenUser(User $user)
+    public static function getOrdersForGivenUser($user)
     {
         require_once("classes.php");
 

@@ -1,5 +1,13 @@
 
+
 <?php
+
+//We are going to assume that data passed all conditions
+//such as passwords match, email unique, etc.
+
+//This will have to be changed in the future for security
+//reasons (if user disables JavaScript)
+
 
 $absolute_root_path = $_SERVER['DOCUMENT_ROOT'];
 

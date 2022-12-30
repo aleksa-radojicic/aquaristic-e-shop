@@ -1,4 +1,8 @@
+
 <?php
+
+//used by login_script.js
+
 
 $absolute_root_path = $_SERVER['DOCUMENT_ROOT'];
 
@@ -19,7 +23,6 @@ $user = UserModel::getUserByEmailAndPassword($email, $password);
 //the user doesn't exists
 if (!$user) {
 
-    //send this message back to register_script.js
     echo "not found";
 
     //if the user isn't found
@@ -28,8 +31,6 @@ if (!$user) {
     //set appropriate parameters in session
     $_SESSION['user'] = serialize($user);
     $_SESSION['logged_in'] = true;
-    $_SESSION['total'] = 0; //initialize cart total price
 
-    //send this message back to register_script.js
     echo "found";
 }

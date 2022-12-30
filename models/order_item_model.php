@@ -64,8 +64,8 @@ class OrderItemModel
         DBBroker::connect();
 
         //query to INSERT new order item
-        $query = "INSERT INTO order_items (order_id, product_id, user_id, product_price, product_quantity)
-            VALUES (?,?,?,?,?)";
+        $query = "INSERT INTO order_items (order_id, product_id, product_price, product_quantity)
+            VALUES (?,?,?,?)";
 
         //creating prepare statement
         $stmt = DBBroker::$conn->prepare($query);
@@ -73,10 +73,9 @@ class OrderItemModel
         //retrieving foreign keys of order item for easier access
         $order_id = $order_item->order->order_id;
         $product_id = $order_item->product->product_id;
-        $user_id = $order_item->user->user_id;
 
         //binding params into created prepared statement
-        $stmt->bind_param("iiidi", $order_id, $product_id, $user_id, $order_item->product_price, $order_item->product_quantity);
+        $stmt->bind_param("iidi", $order_id, $product_id, $order_item->product_price, $order_item->product_quantity);
 
         //status of the change
         $signal = $stmt->execute();

@@ -7,9 +7,6 @@ $absolute_root_path = $_SERVER['DOCUMENT_ROOT'];
 require_once($absolute_root_path . "/classes.php");
 require("cart_update_price.php");
 
-// $odgovnor1 = $_POST['edit_quantity'];
-// // $odgovnor = $_POST['remove_product'];
-
 
 
 //if user removed product from cart
@@ -31,8 +28,10 @@ if (isset($_POST["remove_product"])) {
     //update order items in session
     $_SESSION['cart'] = serialize($order_items);
 
+    //keep total price in variable
     $total_price = updateTotalCartPrice($order_items);
     
+    //return total_price to cart_script.js
     echo $total_price;
 
     //if user edited amount of certain product in cart
@@ -56,12 +55,13 @@ if (isset($_POST["remove_product"])) {
     //update array of order items in session
     $_SESSION['cart'] = serialize($order_items);
 
-
+    //keep total price in variable
     $total_price = updateTotalCartPrice($order_items);
     $subtotal_price = $order_items[$key]->product_quantity * $order_items[$key]->product_price;
 
-    // $prices = $total_price. "!" . $subtotal_price;
+    //create array of total_price and subtotal_price and transform into json
     $prices = json_encode(array($total_price, $subtotal_price));
 
+    //return that json object to cart_script.js
     echo $prices;
 }
