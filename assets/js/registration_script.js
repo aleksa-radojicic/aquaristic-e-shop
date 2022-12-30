@@ -25,7 +25,7 @@ $(document).on("input", "#register-email", function (e) {
     $.ajax({
       method: "POST",
       url: "other/check_email.php",
-      data: { emailId: email },
+      data: { email: email },
 
       //response from check_email can be "0" (false) or "1" (true)
       success: function (response) {
@@ -37,7 +37,7 @@ $(document).on("input", "#register-email", function (e) {
           color = "red";
           message = "Email is not unique";
 
-          //response == "unique" (user with given email doesn't exist)
+          //response == "1" (user with given email doesn't exist)
         } else {
           color = "green";
           message = "Email is unique";
